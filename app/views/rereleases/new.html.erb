@@ -1,0 +1,14 @@
+<h1>New Rerelease</h1>
+
+<dl>
+  <dt>Original</dt>
+  <dd>Title: <%= link_to movie.title, movie %></dd>
+  <dd>Year: <%= movie.year %></dd>
+</dl>
+
+<%= form_for :rerelease, url: movie_rereleases_path(movie), html: { class: "form" } do |f| %>
+  <%= f.label :year, "Rerelease year" %>
+  <%= f.text_field :year %>
+  <br>
+  <%= f.submit "Create Rerelease" %>
+<% end %>
