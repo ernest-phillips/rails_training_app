@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   patch "/movies/:id", to: "movies#update"
   get "/movies/:id/edit", to: "movies#edit", as: "edit_movie"
   delete "/movies/:id", to: "movies#destroy"
+  # post "/movies/:movie_id/rereleases" , to: "rereleases#create"
+
+  resources :movies do
+    resources :rereleases, only: [:create]
+  end
 
   resources :directors
 end
