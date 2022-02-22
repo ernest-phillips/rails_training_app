@@ -9,7 +9,7 @@ class RereleasesTest < ActionDispatch::IntegrationTest
     }
 
     first_release = Movie.find(movie.id)
-    assert_equal "1992", movie.year
+    assert_equal "1992", first_release.year
   end
 
   test "redirects to movie rerelease show page" do

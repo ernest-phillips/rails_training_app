@@ -76,7 +76,7 @@ class MovieTest < ActiveSupport::TestCase
     movie.rerelease(year: "2019")
 
     first_release = Movie.find(movie.id)
-    assert_equal "1992", movie.year
+    assert_equal "1992", first_release.year
   end
 
   test "rerelease creates a copy of the movie with the specified year" do
