@@ -5,7 +5,9 @@ class RereleasesTest < ActionDispatch::IntegrationTest
     movie = create(:movie, year: "1992")
 
     post movie_rereleases_path(movie), params: {
-      year: 2019,
+      rerelease: {
+        year: 2019,
+      }
     }
 
     first_release = Movie.find(movie.id)
@@ -16,7 +18,9 @@ class RereleasesTest < ActionDispatch::IntegrationTest
     movie = create(:movie, year: "1992")
 
     post movie_rereleases_path(movie), params: {
-      year: 2019,
+      rerelease: {
+        year: 2019,
+      }
     }
 
     rerelease = Movie.find_by(title: movie.title, year: 2019)
@@ -28,7 +32,9 @@ class RereleasesTest < ActionDispatch::IntegrationTest
 
     assert_difference(-> { Movie.where(title: movie.title).count }, 1) do
       post movie_rereleases_path(movie), params: {
-        year: 2019,
+        rerelease: {
+          year: 2019,
+        }
       }
     end
 
