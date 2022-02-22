@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DirectorsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @director = create(:director)
+    @director = create(:director, :with_movies)
   end
 
   test "should get index" do
@@ -38,7 +38,18 @@ class DirectorsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to director_url(@director)
   end
 
-  test "should destroy director" do
+  test "should destroy director without movies" do
+    director_without_movies = create(:director)
+
+    assert_difference('Director.count', -1) do
+      delete director_url(director_without_movies)
+    end
+
+    assert_redirected_to directors_url
+  end
+
+  test "shouldn't destroy director with movies" do
+    skip("not implemented yet")
     assert_difference('Director.count', -1) do
       delete director_url(@director)
     end
