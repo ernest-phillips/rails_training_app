@@ -22,4 +22,13 @@ class RereleaseTest < ActiveSupport::TestCase
     db_rerelease = Movie.find_by(title: movie.title, year: 2019)
     assert_equal "2019", db_rerelease.year
   end
+
+  test "rerelease validates the year" do
+    movie = create(:movie, year: "1992")
+    rerelease = Rerelease.new(movie, year: "")
+
+    assert_difference(-> { Movie.where(title: movie.title).count }, 0) do
+      refute rerelease.save
+    end
+  end
 end
