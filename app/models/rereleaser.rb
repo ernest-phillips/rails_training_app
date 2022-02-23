@@ -4,6 +4,9 @@ class Rereleaser
   end
 
   def run(params)
-    
+    @original.dup.tap do |result|
+      result.year = params|:year|
+      result.save
+    end
   end
 end
