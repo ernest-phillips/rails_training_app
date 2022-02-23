@@ -70,39 +70,23 @@ class MovieTest < ActiveSupport::TestCase
     assert_equal 1, count
   end
 
-  test "does not alter the original movie year" do
+  test "rerelease does not alter the original movie year" do
     movie = create(:movie, year: "1992")
 
-    post "/movies/#{movie.id}/rereleases", params: {
-      year: 2019,
-    }
+    movie.rerelease(year: "2019")
 
     first_release = Movie.find(movie.id)
-    assert_equal "1992", movie.year
+    assert_equal "1992", first_release.year
   end
 
-  test "redirects to movie rerelease show page" do
-    movie = create(:movie, year: "1992")
-
-    post "/movies/#{movie.id}/rereleases", params: {
-      year: 2019,
-    }
-
-    rerelease = Movie.find_by(title: movie.title, year: 2019)
-    assert_redirected_to movie_path(rerelease)
-  end
-
-  test "creates a copy of the movie with the specified year" do
+  test "rerelease creates a copy of the movie with the specified year" do
     movie = create(:movie, year: "1992")
 
     assert_difference(-> { Movie.where(title: movie.title).count }, 1) do
-      post "/movies/#{movie.id}/rereleases", params: {
-        year: 2019,
-      }
+      movie.rerelease(year: "2019")
     end
 
     rerelease = Movie.find_by(title: movie.title, year: 2019)
     assert_equal "2019", rerelease.year
   end
-
 end
