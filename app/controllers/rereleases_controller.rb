@@ -8,4 +8,8 @@ class RereleasesController < ApplicationController
 
     redirect_to movie_path(rerelease)
   end
+
+  def release_params
+    params.require()
+  end
 end
