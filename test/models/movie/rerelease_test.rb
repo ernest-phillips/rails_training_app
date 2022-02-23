@@ -3,7 +3,7 @@ require 'test_helper'
 class RereleaseTest < ActiveSupport::TestCase
   test "rerelease does not alter the original movie year" do
     movie = create(:movie, year: "1992")
-    rerelease = Rerelease.new(movie, year: "2019")
+    rerelease = Movie::Rerelease.new(movie, year: "2019")
 
     rerelease.save
 
@@ -13,7 +13,7 @@ class RereleaseTest < ActiveSupport::TestCase
 
   test "rerelease creates a copy of the movie with the specified year" do
     movie = create(:movie, year: "1992")
-    rerelease = Rerelease.new(movie, year: "2019")
+    rerelease = Movie::Rerelease.new(movie, year: "2019")
 
     assert_difference(-> { Movie.where(title: movie.title).count }, 1) do
       rerelease.save
@@ -27,7 +27,7 @@ class RereleaseTest < ActiveSupport::TestCase
 
   test "rerelease requires a year" do
     movie = create(:movie, year: "1992")
-    rerelease = Rerelease.new(movie, year: "")
+    rerelease = Movie::Rerelease.new(movie, year: "")
 
     refute rerelease.save
     refute rerelease.persisted?

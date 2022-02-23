@@ -8,7 +8,7 @@
 
 <%= render "errors", rerelease: rerelease %>
 
-<%= form_for rerelease, url: movie_rereleases_path(rerelease.original), html: { class: "form" } do |f| %>
+<%= form_for rerelease, as: :rerelease, url: movie_rereleases_path(rerelease.original), html: { class: "form" } do |f| %>
   <%= f.label :year, "Rerelease year" %>
   <%= f.text_field :year %>
   <br>
