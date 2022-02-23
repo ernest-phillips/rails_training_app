@@ -19,7 +19,17 @@ class RereleaseTest < ActiveSupport::TestCase
       rerelease.save
     end
 
+    assert rerelease.persisted?
+
     rerelease_movie = Movie.find(rerelease.id)
     assert_equal "2019", rerelease_movie.year
+  end
+
+  test "rerelease requires a year" do
+    movie = create(:movie, year: "1992")
+    rerelease = Rerelease.new(movie, year: "")
+
+    refute rerelease.save
+    refute rerelease.persisted?
   end
 end

@@ -31,4 +31,16 @@ class RereleasesSystemTest < ApplicationSystemTestCase
     rerelease = Movie.find_by(title: "The Thing", year: "2011")
     assert rerelease
   end
+
+  test "leaving the new page blank" do
+    movie = create(:movie, title: "The Thing", director_name: "John Carpenter", year: "1982")
+
+    visit new_movie_rerelease_path(movie.id)
+
+    fill_in "Rerelease year", with: ""
+
+    click_on "Create Rerelease"
+
+    assert_text "Year can't be blank"
+  end
 end
