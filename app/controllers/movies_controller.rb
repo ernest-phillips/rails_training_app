@@ -41,19 +41,7 @@ class MoviesController < ApplicationController
     else
       render "edit", locals: { movie: movie }
     end
-  end
-
-  # def new_release
-  #   movie = Movie.find(params[:id])
-  #   movie = movie.dup()
-  #   movie.year = params[:year] 
-
-  #   if movie.save()
-  #     redirect_to movie
-  #   else
-  #     render "edit", locals: { movie: movie }
-  #   end
-  # end
+  end  
 
   def destroy
     movie = Movie.find(params[:id])
