@@ -1,9 +1,11 @@
 class RereleasesController < ApplicationController
   def create
-    original_movie = Movie.find(params[:movie_id])
-    
-    rerelease = move.create_rerelease(year: params[:year])
-    
+    movie = Movie.find(params[:movie_id])
+
+    rerelease = movie.dup
+    rerelease.year = params[:year]
+    rerelease.save
+
     redirect_to movie_path(rerelease)
-  end  
+  end
 end

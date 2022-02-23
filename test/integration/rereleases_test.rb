@@ -1,12 +1,10 @@
-# test/integration/rereleases_test.rb
-
 require 'test_helper'
 
 class RereleasesTest < ActionDispatch::IntegrationTest
   test "does not alter the original movie year" do
     movie = create(:movie, year: "1992")
 
-    post "/movies/#{movie.id}/rereleases", params: {
+    post movie_rereleases_path(movie), params: {
       year: 2019,
     }
 
@@ -17,7 +15,7 @@ class RereleasesTest < ActionDispatch::IntegrationTest
   test "redirects to movie rerelease show page" do
     movie = create(:movie, year: "1992")
 
-    post "/movies/#{movie.id}/rereleases", params: {
+    post movie_rereleases_path(movie), params: {
       year: 2019,
     }
 
@@ -29,7 +27,7 @@ class RereleasesTest < ActionDispatch::IntegrationTest
     movie = create(:movie, year: "1992")
 
     assert_difference(-> { Movie.where(title: movie.title).count }, 1) do
-      post "/movies/#{movie.id}/rereleases", params: {
+      post movie_rereleases_path(movie), params: {
         year: 2019,
       }
     end
