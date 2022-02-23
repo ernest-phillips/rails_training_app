@@ -2,8 +2,9 @@
 
 <dl>
   <% movies.each do |movie| %>
-    <dt><%= movie.title %></dt>
-    <dd>directed by <%= movie.director&.name %></dd>
+    <dt style= "font-weight: bold; font-family: Georgia, 'Times New Roman', Times, serif;"><%= movie.title %></dt>
+    <dd style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">directed by <%= movie.director&.name %></dd>
+    <dd style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">year: <%= movie.year %></dd>
   <% end %>
 </dl>
 
