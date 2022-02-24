@@ -12,9 +12,11 @@ class RereleasesController < ApplicationController
 
     rerelease = Rerelease.new(movie, rerelease_params)
 
-    rerelease.save
-
-    redirect_to movie_path(rerelease.id)
+    if rerelease.save
+      redirect_to movie_path(rerelease.id)
+    else
+      render "new", locals: { rerelease: rerelease }
+    end
   end
 
   private
