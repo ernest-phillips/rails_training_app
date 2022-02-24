@@ -1,4 +1,6 @@
 class Movie < ApplicationRecord
+  using MovieRefinement
+
   attr_accessor :director_name
   using MovieRefinement
   
@@ -56,6 +58,10 @@ class Movie < ApplicationRecord
   scope :with_plot_keyword, -> (keyword) { where("plot_keywords LIKE ?", "%#{keyword}%") }
 
   scope :with_most_facebook_likes, -> { order(facebook_likes: :desc).limit(1) }
+
+  def to_marquee
+    title.to_marquee
+  end
 
   private
 

@@ -2,7 +2,7 @@ class RereleasesController < ApplicationController
   def new
     movie = Movie.find(params[:movie_id])
 
-    rerelease = Rerelease.new(movie, {})
+    rerelease = Movie::Rerelease.new(movie, {})
 
     render locals: { rerelease: rerelease }
   end
@@ -10,7 +10,7 @@ class RereleasesController < ApplicationController
   def create
     movie = Movie.find(params[:movie_id])
 
-    rerelease = Rerelease.new(movie, rerelease_params)
+    rerelease = Movie::Rerelease.new(movie, rerelease_params)
 
     if rerelease.save
       redirect_to movie_path(rerelease.id)
