@@ -29,9 +29,17 @@ class Movie < ApplicationRecord
     find_by(title: target_title)&.year
   end
 
+  scope :with_more_facebook_likes, -> (target_likes) { where("facebook_likes > ?", target_likes) }
+
   def self.count_with_facebook_likes(target_likes)
-    where("facebook_likes > ?", target_likes).count
+    with_more_facebook_likes(target_likes).count
   end
+
+  scope :directed_by, -> (director_name) { joins(:director).where(directors: {name: director_name }) }
+
+  scope :with_plot_keyword, -> (keyword) { where("plot_keywords LIKE ?", "%#{keyword}%") }
+
+  scope :with_most_facebook_likes, -> { order(facebook_likes: :desc).limit(1) }
 
   private
 
