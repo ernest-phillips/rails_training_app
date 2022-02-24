@@ -1,6 +1,7 @@
 class Movie < ApplicationRecord
   attr_accessor :director_name
-
+  using MovieRefinement
+  
   enum :color_format => {
     :color => 0,
     :black_and_white => 1
@@ -14,6 +15,15 @@ class Movie < ApplicationRecord
   # * that column refers to the id column on directors
 
   before_validation :set_director_by_name
+
+ 
+    refine Object do 
+      def to_marquee    
+        title.to_marquee      
+      end
+    end
+  
+  
 
   def rerelease(params)
     rerelease = dup
