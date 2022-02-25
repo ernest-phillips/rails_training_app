@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2022_02_25_171304) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2022_02_25_171259) do
+>>>>>>> al2o3cr-main
   create_table "actors", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -19,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_25_171304) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "actors_movies", id: false, force: :cascade do |t|
     t.integer "actor_id", null: false
     t.integer "movie_id", null: false
@@ -26,6 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_25_171304) do
     t.index ["movie_id", "actor_id"], name: "index_actors_movies_on_movie_id_and_actor_id", unique: true
   end
 
+=======
+>>>>>>> al2o3cr-main
   create_table "castings", force: :cascade do |t|
     t.integer "movie_id"
     t.integer "actor_id"
