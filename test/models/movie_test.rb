@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class MovieTest < ActiveSupport::TestCase
+  using MovieRefinement
+
   test "movie is valid with a title" do
     director = build(:director, name: "Bong Joon-ho")
     movie = build(:movie, title: "Parasite", director: director)
@@ -68,5 +70,21 @@ class MovieTest < ActiveSupport::TestCase
     count = Movie.count_with_facebook_likes(10)
 
     assert_equal 1, count
+  end
+
+  test "movie can be output as a marquee" do
+    movie = Movie.new(title: "Avatar")
+    assert_equal movie.to_marquee, "**AVATAR**"
+  end
+
+  test "movie's title can be output as a marquee" do
+    movie = Movie.new(title: "Avatar")
+    assert_equal movie.title.to_marquee, "**AVATAR**"
+  end
+
+  test "movie can have many actors" do
+    movie = create(:movie)
+
+    assert_equal 1, movie.actors.count
   end
 end

@@ -1,4 +1,6 @@
 class Movie < ApplicationRecord
+  using MovieRefinement
+
   attr_accessor :director_name
 
   enum :color_format => {
@@ -12,6 +14,8 @@ class Movie < ApplicationRecord
   # * there is a class called Director - override with class_name
   # * there is a column called director_id on this model's table
   # * that column refers to the id column on directors
+
+  has_many :actors
 
   before_validation :set_director_by_name
 
@@ -35,8 +39,20 @@ class Movie < ApplicationRecord
     find_by(title: target_title)&.year
   end
 
+  scope :with_more_facebook_likes, -> (target_likes) { where("facebook_likes > ?", target_likes) }
+
   def self.count_with_facebook_likes(target_likes)
-    where("facebook_likes > ?", target_likes).count
+    with_more_facebook_likes(target_likes).count
+  end
+
+  scope :directed_by, -> (director_name) { joins(:director).where(directors: {name: director_name }) }
+
+  scope :with_plot_keyword, -> (keyword) { where("plot_keywords LIKE ?", "%#{keyword}%") }
+
+  scope :with_most_facebook_likes, -> { order(facebook_likes: :desc).limit(1) }
+
+  def to_marquee
+    title.to_marquee
   end
 
   private

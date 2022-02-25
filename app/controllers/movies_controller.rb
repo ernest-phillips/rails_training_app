@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   def index
-    movies = Movie.all
+    movies = Movie.includes(:director)
 
     render locals: { movies: movies }
   end

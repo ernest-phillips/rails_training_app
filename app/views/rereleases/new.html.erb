@@ -2,11 +2,13 @@
 
 <dl>
   <dt>Original</dt>
-  <dd>Title: <%= link_to movie.title, movie %></dd>
-  <dd>Year: <%= movie.year %></dd>
+  <dd>Title: <%= link_to rerelease.original.title, rerelease.original %></dd>
+  <dd>Year: <%= rerelease.original.year %></dd>
 </dl>
 
-<%= form_for :rerelease, url: movie_rereleases_path(movie), html: { class: "form" } do |f| %>
+<%= render "errors", rerelease: rerelease %>
+
+<%= form_for rerelease, as: :rerelease, url: movie_rereleases_path(rerelease.original), html: { class: "form" } do |f| %>
   <%= f.label :year, "Rerelease year" %>
   <%= f.text_field :year %>
   <br>
