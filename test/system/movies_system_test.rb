@@ -11,7 +11,9 @@ class MoviesSystemTest < ApplicationSystemTestCase
 
     visit movie_path(movie.id)
     assert_text "Parasite"
-    assert_text "Bong Joon-ho"
+    assert_text "Directed by Bong Joon-ho"
+
+    assert_selector 'img.star', count: movie.stars
   end
 
   test "visiting the show for a different movie" do
