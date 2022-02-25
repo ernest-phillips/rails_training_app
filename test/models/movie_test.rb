@@ -80,4 +80,10 @@ class MovieTest < ActiveSupport::TestCase
     movie = Movie.new(title: "Avatar")
     assert_equal movie.title.to_marquee, "**AVATAR**"
   end
+
+  test "movie can have many actors" do
+    movie = create(:movie)
+
+    assert_equal 1, count
+  end
 end
