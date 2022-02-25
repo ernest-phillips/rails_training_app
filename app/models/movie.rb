@@ -15,6 +15,8 @@ class Movie < ApplicationRecord
   # * there is a column called director_id on this model's table
   # * that column refers to the id column on directors
 
+  has_many :actors
+
   before_validation :set_director_by_name
 
   def self.titles
