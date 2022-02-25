@@ -83,11 +83,8 @@ class MovieTest < ActiveSupport::TestCase
 
   test "movie can have many actors" do
     movie = create(:movie)
-
-<<<<<<< HEAD
-    assert_equal 1, count
-=======
+    movie.actors.push(create(:actor))
+    
     assert_equal 1, movie.actors.count
->>>>>>> al2o3cr-main
   end
 end

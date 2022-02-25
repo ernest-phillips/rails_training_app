@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_25_161244) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_25_163750) do
   create_table "actors", force: :cascade do |t|
     t.string "name"
     t.integer "age"
     t.boolean "oscar_nominee", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "actors_movies", id: false, force: :cascade do |t|
+    t.integer "actor_id", null: false
+    t.integer "movie_id", null: false
+    t.index ["actor_id", "movie_id"], name: "index_actors_movies_on_actor_id_and_movie_id", unique: true
+    t.index ["movie_id", "actor_id"], name: "index_actors_movies_on_movie_id_and_actor_id", unique: true
   end
 
   create_table "directors", force: :cascade do |t|

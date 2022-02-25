@@ -5,6 +5,8 @@ FactoryBot.define do
 
     trait :with_movies do
       movies { Array.new(3) { association(:movie, director: instance) } }
+    
+      
     end
   end
 end
