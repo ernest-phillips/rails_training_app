@@ -10,8 +10,8 @@ class MoviesSystemTest < ApplicationSystemTestCase
     movie = create(:movie, title: "Parasite", director: director)
 
     visit movie_path(movie.id)
-    assert_text "Parasite"
-    assert_text "Directed by Bong Joon-ho"
+    assert_text "Parasite".upcase
+    assert_text "#{I18n.t('movies.show.directed_by')} Bong Joon-ho"
 
     assert_selector 'img.star', count: movie.stars
   end
