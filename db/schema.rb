@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_25_171304) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_25_181808) do
   create_table "actors", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -49,7 +49,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_25_171304) do
     t.string "plot_keywords"
     t.integer "color_format", default: 0, null: false
     t.integer "director_id"
+    t.integer "stars"
     t.index ["director_id"], name: "index_movies_on_director_id"
+    t.index ["stars"], name: "index_movies_on_stars"
   end
 
   add_foreign_key "movies", "directors"

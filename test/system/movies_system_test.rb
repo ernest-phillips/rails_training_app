@@ -6,12 +6,15 @@ class MoviesSystemTest < ApplicationSystemTestCase
     # when I visit /movies/1
     # I see the title of the movie "Parasite"
     # I also see the name of the director "Bong Joon-ho"
+
     director = create(:director, name: "Bong Joon-ho")
     movie = create(:movie, title: "Parasite", director: director)
 
     visit movie_path(movie.id)
     assert_text "Parasite"
-    assert_text "Bong Joon-ho"
+    assert_text "Directed by Bong Joon-ho"
+
+    assert_selector 'img.star', count: movie.stars
   end
 
   test "visiting the show for a different movie" do

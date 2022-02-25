@@ -1,5 +1,8 @@
 <h3><%= movie.title %></h3>
-<h4><%= movie.director&.name %></h4>
+<h4>Directed by <%= movie.director&.name %></h4>
+<% movie.stars.to_i.times do %>
+  <img class="star" width="20" height="20" src="<%= asset_path('rating/star.png') %>" alt="star">
+<% end %>
 
 
 <%= button_to "Edit Movie", edit_movie_path(movie.id), method: :get %>
