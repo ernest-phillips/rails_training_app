@@ -1,3 +1,4 @@
 class Actor < ApplicationRecord
-  has_and_belongs_to_many :movies
+  has_many :castings
+  has_many :movies, through: :castings
 end

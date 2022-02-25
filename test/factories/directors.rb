@@ -4,9 +4,7 @@ FactoryBot.define do
     age { rand(100) }
 
     trait :with_movies do
-      movies { Array.new(3) { association(:movie, director: instance) } }
-    
-      
+      movies { Array.new(3) { association(:movie, director: instance) } }      
     end
   end
 end

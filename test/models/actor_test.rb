@@ -5,6 +5,6 @@ class ActorTest < ActiveSupport::TestCase
     actor = create(:actor)
     actor.movie.push(create(:movie)) 
 
-    assert_equal 1, actor.movies.count
+    assert_equal 3, actor.movies.count
   end
 end

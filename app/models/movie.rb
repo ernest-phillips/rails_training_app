@@ -14,11 +14,11 @@ class Movie < ApplicationRecord
   # * there is a class called Director - override with class_name
   # * there is a column called director_id on this model's table
   # * that column refers to the id column on directors
-
-  has_many :actors
-
+  has_many :castings
+  has_many :actors, through: :castings 
+  
   before_validation :set_director_by_name
-  has_many :actor
+  
 
   def self.titles
     # all.map { |movie| movie.title }
