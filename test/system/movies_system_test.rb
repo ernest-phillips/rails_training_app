@@ -98,4 +98,32 @@ class MoviesSystemTest < ApplicationSystemTestCase
 
     refute Movie.exists?(movie.id)
   end
+
+  test "members can log in and be greeted by name" do
+    member = create(:member, password: "password", password_confirmation: "password")
+
+    visit movies_path
+
+    click_link "Log In"
+
+    fill_in :email, with: member.email
+    fill_in :password, with: "password"
+
+    click_button "Submit"
+
+    assert_text member.email
+  end
+
+  test "non-members can't log in" do
+    visit movies_path
+
+    click_link "Log In"
+
+    fill_in :email, with: "nobody@example.com"
+    fill_in :password, with: "password"
+
+    click_button "Submit"
+
+    assert_text "Unknown user or wrong password"
+  end
 end

@@ -1,5 +1,9 @@
 <h1>All Movies</h1>
-
+<% if current_member %>
+  Logged in as <%= current_member.email %>
+<% else %>
+  <%= link_to "Log In", login_path %>
+<% end %>
 <dl>
   <% movies.each do |movie| %>
     <dt><%= movie.title %></dt>
