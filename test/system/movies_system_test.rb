@@ -23,7 +23,7 @@ class MoviesSystemTest < ApplicationSystemTestCase
     movie = create(:movie, title: "Other Movie")
 
     visit movie_path(movie.id)
-    assert_text "Other Movie"
+    assert_text "OTHER MOVIE"
   end
 
   test "visiting the index page" do
@@ -63,7 +63,7 @@ class MoviesSystemTest < ApplicationSystemTestCase
 
     click_on "Create"
 
-    assert_text "A New Movie"
+    assert_text "A NEW MOVIE"
 
     movie = Movie.order(id: :desc).first
     assert_equal "A New Movie", movie.title
@@ -82,7 +82,7 @@ class MoviesSystemTest < ApplicationSystemTestCase
 
     click_on "Update"
 
-    assert_text "Edited Movie"
+    assert_text "EDITED MOVIE"
   end
 
   test "deleting a movie" do
