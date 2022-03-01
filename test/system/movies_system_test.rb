@@ -12,7 +12,7 @@ class MoviesSystemTest < ApplicationSystemTestCase
 
     visit movie_path(movie.id)
     assert_text "Parasite"
-    assert_text "Directed by Bong Joon-ho"
+    assert_text "#{ I18n.t('movies.show.directed_by') } Bong Joon-ho"
 
     assert_selector 'img.star', count: movie.stars
   end

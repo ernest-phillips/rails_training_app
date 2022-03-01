@@ -1,7 +1,8 @@
 <h3><%= movie.title %></h3>
-<h4>Directed by <%= movie.director&.name %></h4>
+<h4><%= t('.directed_by') %> <%= movie.director&.name %></h4>
 <% movie.stars.to_i.times do %>
   <img class="star" width="20" height="20" src="<%= asset_path('rating/star.png') %>" alt="star">
+  <%= image_tag 'rating/star.png', width:20, height: 20, alt: :star, class: :star %>
 <% end %>
 
 
