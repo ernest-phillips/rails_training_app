@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_25_181808) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_28_172901) do
   create_table "actors", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -33,6 +33,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_25_181808) do
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin"
   end
 
   create_table "movies", force: :cascade do |t|

@@ -56,6 +56,26 @@ class Movie < ApplicationRecord
     title.to_marquee
   end
 
+  def method_missing(method_name, *args, &block)
+    # Alternate:
+    # if method_name.to_s.match /^is_in_(.*)$/
+    #   send($1)
+    # else
+    #   super
+    # end
+
+    if method_name.to_s.start_with?("is_in_")
+      short_name = method_name.to_s.gsub(/^is_in_/,"")
+      send(short_name)
+    else
+      super
+    end
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    method_name.to_s.start_with?("is_in_") || super
+  end
+
   private
 
   def set_director_by_name
