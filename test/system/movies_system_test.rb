@@ -11,8 +11,8 @@ class MoviesSystemTest < ApplicationSystemTestCase
     movie = create(:movie, title: "Parasite", director: director)
 
     visit movie_path(movie.id)
-    assert_text "Parasite"
-    assert_text "#{ I18n.t('movies.show.directed_by') } Bong Joon-ho"
+    assert_text "Parasite".upcase
+    assert_text "#{I18n.t('movies.show.directed_by')} Bong Joon-ho"
 
     assert_selector 'img.star', count: movie.stars
   end
@@ -24,7 +24,7 @@ class MoviesSystemTest < ApplicationSystemTestCase
     movie = create(:movie, title: "Other Movie")
 
     visit movie_path(movie.id)
-    assert_text "Other Movie"
+    assert_text "OTHER MOVIE"
   end
 
   test "visiting the index page" do
@@ -64,7 +64,7 @@ class MoviesSystemTest < ApplicationSystemTestCase
 
     click_on "Create"
 
-    assert_text "A New Movie"
+    assert_text "A NEW MOVIE"
 
     movie = Movie.order(id: :desc).first
     assert_equal "A New Movie", movie.title
@@ -83,7 +83,7 @@ class MoviesSystemTest < ApplicationSystemTestCase
 
     click_on "Update"
 
-    assert_text "Edited Movie"
+    assert_text "EDITED MOVIE"
   end
 
   test "deleting a movie" do
@@ -98,5 +98,33 @@ class MoviesSystemTest < ApplicationSystemTestCase
     assert_current_path movies_path
 
     refute Movie.exists?(movie.id)
+  end
+
+  test "members can log in and be greeted by name" do
+    member = create(:member, password: "password", password_confirmation: "password")
+
+    visit movies_path
+
+    click_link "Log In"
+
+    fill_in :email, with: member.email
+    fill_in :password, with: "password"
+
+    click_button "Submit"
+
+    assert_text member.email
+  end
+
+  test "non-members can't log in" do
+    visit movies_path
+
+    click_link "Log In"
+
+    fill_in :email, with: "nobody@example.com"
+    fill_in :password, with: "password"
+
+    click_button "Submit"
+
+    assert_text "Unknown user or wrong password"
   end
 end

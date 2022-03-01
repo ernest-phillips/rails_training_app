@@ -87,4 +87,16 @@ class MovieTest < ActiveSupport::TestCase
 
     assert_equal 1, movie.actors.count
   end
+
+  test "is_in methods" do
+    movie = create(:movie)
+
+    assert movie.is_in_color?, "should be color"
+    refute movie.is_in_black_and_white?, "should not be black and white"
+
+    movie.black_and_white!
+
+    assert movie.is_in_black_and_white?, "should be black and white"
+    refute movie.is_in_color?, "should not be color"
+  end
 end

@@ -7,4 +7,9 @@ class DirectorTest < ActiveSupport::TestCase
     assert_equal director.name, "Bong Joon-ho"
     assert_equal director.age, 50
   end
+
+  test "director can be hired" do
+    director = Director.new(name: "Bong Joon-ho")
+    assert_equal director.hire, "Bong Joon-ho is now working for your studio."
+  end
 end
